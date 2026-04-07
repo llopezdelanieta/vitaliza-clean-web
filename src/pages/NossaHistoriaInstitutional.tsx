@@ -25,8 +25,8 @@ export default function NossaHistoriaInstitutional() {
     <div className="font-['Inter',sans-serif] min-h-screen bg-white text-slate-900">
       <SiteHeader />
 
-      <main className="pt-24 md:pt-32">
-        <section className="relative overflow-hidden bg-slate-950">
+      <main>
+        <section className="relative -mt-16 overflow-hidden bg-slate-950 md:-mt-10">
           <div className="absolute inset-0">
             <img
               src={assetUrl("images/nossa-historia/fachada-com-carga.jpg")}
@@ -36,7 +36,7 @@ export default function NossaHistoriaInstitutional() {
             <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(8,47,73,0.92),rgba(14,116,144,0.78),rgba(37,99,235,0.72))]" />
           </div>
 
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+          <div className="relative max-w-7xl mx-auto px-4 pt-32 pb-20 sm:px-6 md:pt-40 md:pb-28 lg:px-8">
             <div className="max-w-4xl">
               <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-cyan-200 backdrop-blur-sm">
                 Conheça a nossa empresa
