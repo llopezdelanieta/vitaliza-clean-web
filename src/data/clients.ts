@@ -1,0 +1,46 @@
+export type Client = {
+  name: string;
+  logo: string;
+  segment: "Alimentício" | "Automotivo" | "Sistemista" | "Industrial" | "Hospitalar" | "Farmacêutico";
+};
+
+export const CLIENTS: Client[] = [
+  { name: "Rio Acima", logo: "/images/clientes/logo_rioacima.png", segment: "Alimentício" },
+  { name: "Kentisa", logo: "/images/clientes/logo_kentisa.png", segment: "Alimentício" },
+  { name: "Morita", logo: "/images/clientes/morita-300x288.png", segment: "Alimentício" },
+  { name: "Elo Fruti", logo: "/images/clientes/logo_elo.png", segment: "Alimentício" },
+  { name: "Agro Bonfim", logo: "/images/clientes/logo_agrobonfim.png", segment: "Alimentício" },
+  { name: "Els Bananas", logo: "/images/clientes/elsbananas-300x234.jpg", segment: "Alimentício" },
+  { name: "MJ Maciel", logo: "/images/clientes/maciel.jpg", segment: "Alimentício" },
+  { name: "Campo Alto", logo: "/images/clientes/campoalto-300x136.png", segment: "Alimentício" },
+  { name: "Hortigil Hortifruti", logo: "/images/clientes/hortigil-hortifruti-vitalizaplast.jpg", segment: "Alimentício" },
+  { name: "Natural da Terra", logo: "/images/clientes/natural-da-terra-vitalizaplast.jpg", segment: "Alimentício" },
+  { name: "Naturalis", logo: "/images/clientes/naturalis-vitalizaplast.jpg", segment: "Alimentício" },
+  { name: "Domino's Pizza", logo: "/images/clientes/dominos-1.png", segment: "Alimentício" },
+  { name: "Oba Hortifruti", logo: "/images/clientes/Oba-300x300.png", segment: "Alimentício" },
+  { name: "Oggi Sorvetes", logo: "/images/clientes/df82d0ea71135843c3a33bd5e1d7c881-300x184.png", segment: "Alimentício" },
+  { name: "Estampo Tec", logo: "/images/clientes/ESTAMPO-TEC-300x68.png", segment: "Automotivo" },
+  { name: "Acrilex", logo: "/images/clientes/logo-acrilex-300x120.png", segment: "Industrial" },
+  { name: "Paranoá", logo: "/images/clientes/LOGO-PARANOA.png", segment: "Industrial" },
+  { name: "Isringhausen", logo: "/images/clientes/ISRINGHAUSEN-300x300.jpg", segment: "Sistemista" },
+  { name: "Mitsubishi Electric", logo: "/images/clientes/melco-mitsubishi-eletric-vitalizaplast.jpg", segment: "Automotivo" },
+  { name: "Haldex", logo: "/images/clientes/Haldex-Vitalizaplast.jpg", segment: "Sistemista" },
+  { name: "Freudenberg", logo: "/images/clientes/freudenberg-vitalizaplast.jpg", segment: "Sistemista" },
+  { name: "Zanettini", logo: "/images/clientes/zanettini-vitalizaplast.jpg", segment: "Sistemista" },
+  { name: "Max Del", logo: "/images/clientes/maxdel-vitalizaplast.jpg", segment: "Sistemista" },
+  { name: "Associated Springs", logo: "/images/clientes/Associated-Springs-vitalizaplast.jpg", segment: "Sistemista" },
+  { name: "Schaeffler", logo: "/images/clientes/Schaeffler-vitalizaplast.jpg", segment: "Automotivo" },
+  { name: "Cummins", logo: "/images/clientes/cummins-vitalizaplast.jpg", segment: "Sistemista" },
+  { name: "Aisin", logo: "/images/clientes/aisin-vitalizaplast.jpg", segment: "Automotivo" },
+  { name: "Sanko Espumas", logo: "/images/clientes/sanko-espumas-vitalizaplast.jpg", segment: "Sistemista" },
+  { name: "Brassinter", logo: "/images/clientes/brassinter-vitalizaplast.jpg", segment: "Industrial" },
+  { name: "Norgren", logo: "/images/clientes/norgren-vitalizaplast.jpg", segment: "Sistemista" },
+  { name: "Lopsa", logo: "/images/clientes/lopsa-300x172.jpg", segment: "Industrial" },
+  { name: "Minebea AccessSolutions", logo: "/images/clientes/Minebea-300x87.png", segment: "Sistemista" },
+  { name: "Marelli", logo: "/images/clientes/logo-marelli-300x215.png", segment: "Automotivo" },
+  { name: "Scania", logo: "/images/clientes/logo-SCANIA.png", segment: "Automotivo" },
+  { name: "Johnson & Johnson", logo: "/images/clientes/logotipo-Johnson-Johnson-historia-300x167.jpg", segment: "Farmacêutico" },
+  { name: "Hosplog", logo: "/images/clientes/hosplog-240x300.png", segment: "Hospitalar" },
+  { name: "Hospital das Clínicas", logo: "/images/clientes/hospital-das-clinicas-vitalizaplast.jpg", segment: "Hospitalar" },
+  { name: "Colgate-Palmolive", logo: "/images/clientes/Colgate-Palmolive.png", segment: "Farmacêutico" },
+];
