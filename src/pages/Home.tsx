@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader";
-import { CLIENTS } from "../data/clientsBase";
+import { CLIENTS } from "../data/clients";
 import { assetUrl } from "../lib/assets";
 
 const NAV_LINKS = [
@@ -925,6 +925,5 @@ export default function Home() {
     </div>
   );
 }
-
 
 

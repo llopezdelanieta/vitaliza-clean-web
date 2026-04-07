@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+ï»¿import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader";
-import { SERVICE_PAGES_BY_SLUG } from "../data/servicePagesBase";
+import { SERVICE_PAGES_BY_SLUG } from "../data/servicePages";
 import { assetUrl } from "../lib/assets";
 
 export default function ServiceSectorPageV2() {
@@ -37,7 +37,7 @@ export default function ServiceSectorPageV2() {
               {service.badge}
             </span>
             <h1 className="mt-6 max-w-4xl text-4xl md:text-5xl lg:text-6xl font-extrabold text-white">
-              Soluções para o {service.title.toLowerCase()}
+              SoluÃ§Ãµes para o {service.title.toLowerCase()}
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/85">
               {service.description}
@@ -47,7 +47,7 @@ export default function ServiceSectorPageV2() {
                 to={{ pathname: "/", hash: "#contato" }}
                 className="inline-flex items-center justify-center rounded-2xl bg-white px-6 py-3.5 font-semibold text-slate-900 transition-transform hover:scale-[1.02]"
               >
-                Solicitar orçamento
+                Solicitar orÃ§amento
               </Link>
               <Link
                 to="/nossa-historia"
@@ -121,14 +121,14 @@ export default function ServiceSectorPageV2() {
             <img src={assetUrl("images/logotipo_100x100.png")} alt="Vitaliza Plast" className="h-12" />
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               <Link to="/" className="hover:text-cyan-400 transition-colors">
-                Início
+                InÃ­cio
               </Link>
               <Link to="/nossa-historia" className="hover:text-cyan-400 transition-colors">
-                Nossa História
+                Nossa HistÃ³ria
               </Link>
             </div>
             <div className="text-sm text-center">
-              © {new Date().getFullYear()} Vitaliza Clean. Todos os direitos reservados.
+              Â© {new Date().getFullYear()} Vitaliza Clean. Todos os direitos reservados.
             </div>
           </div>
         </div>

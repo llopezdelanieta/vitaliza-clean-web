@@ -1,3 +1,5 @@
+import { assetUrl } from "../lib/assets";
+
 export type ServiceSector = {
   id: string;
   slug: string;
@@ -22,7 +24,7 @@ export const SERVICE_SECTORS: ServiceSector[] = [
     title: "Setor alimentício",
     description:
       "A higienização de contentores é um procedimento fundamental para evitar a contaminação nos produtos transportados e eliminar fungos, pragas e bactérias. A Vitaliza Clean apresenta soluções especializadas para operações alimentícias e supermercadistas.",
-    image: "/images/food-crates.jpg",
+    image: assetUrl("images/food-crates.jpg"),
     badge: "Alimentício",
     color: "from-emerald-500 to-teal-600",
     lightColor: "bg-emerald-50",
@@ -46,7 +48,7 @@ export const SERVICE_SECTORS: ServiceSector[] = [
     title: "Setor automotivo, sistemista e industrial",
     description:
       "O mercado de autopeças exige eficiência logística e baixo custo operacional. A Vitaliza Clean contribui significativamente na redução da aquisição de novas embalagens plásticas, revitalizando com qualidade os contentores usados.",
-    image: "/images/automotive-klt.jpg",
+    image: assetUrl("images/automotive-klt.jpg"),
     badge: "Automotivo",
     color: "from-blue-500 to-indigo-600",
     lightColor: "bg-blue-50",
@@ -70,7 +72,7 @@ export const SERVICE_SECTORS: ServiceSector[] = [
     title: "Setor hospital e farmacêutico",
     description:
       "A higienização de contentores, pallets e estrados é fundamental para evitar contaminação nos produtos armazenados. A Vitaliza Clean atua neste mercado com resultados altamente satisfatórios para hospitais, laboratórios e grandes indústrias farmacêuticas.",
-    image: "/images/pharma-crates.jpg",
+    image: assetUrl("images/pharma-crates.jpg"),
     badge: "Hospitalar e Farmacêutico",
     color: "from-violet-500 to-purple-600",
     lightColor: "bg-violet-50",

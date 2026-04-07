@@ -1,5 +1,7 @@
+﻿import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader";
+import { assetUrl } from "../lib/assets";
 
 const STORY_BLOCKS = [
   "Somos a VITALIZA CLEAN, especializada em lavagem e higienização de caixas plásticas, onde finalmente os segmentos alimentício, automotivo, farmacêutico, entre outros, podem contar com uma empresa especializada em lavagem, higienização e revitalização de caixas plásticas e outros produtos plásticos.",
@@ -15,6 +17,10 @@ const DIFFERENTIALS = [
 ];
 
 export default function NossaHistoriaInstitutional() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
   return (
     <div className="font-['Inter',sans-serif] min-h-screen bg-white text-slate-900">
       <SiteHeader />
@@ -23,7 +29,7 @@ export default function NossaHistoriaInstitutional() {
         <section className="relative overflow-hidden bg-slate-950">
           <div className="absolute inset-0">
             <img
-              src="/images/nossa-historia/fachada-com-carga.jpg"
+              src={assetUrl("images/nossa-historia/fachada-com-carga.jpg")}
               alt="Fachada da Vitaliza Clean com caminhão carregado"
               className="h-full w-full object-cover opacity-35"
             />
@@ -80,7 +86,7 @@ export default function NossaHistoriaInstitutional() {
             <div className="space-y-6">
               <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-100 shadow-2xl shadow-slate-200/70">
                 <img
-                  src="/images/nossa-historia/fachada.jpg"
+                  src={assetUrl("images/nossa-historia/fachada.jpg")}
                   alt="Fachada da empresa Vitaliza Clean"
                   className="h-full w-full object-cover"
                 />
@@ -120,8 +126,8 @@ export default function NossaHistoriaInstitutional() {
 
         <section className="bg-slate-50 py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">              
-              <h2 className="mt-5 text-3xl font-bold text-slate-900 md:text-4x1">
+            <div className="max-w-3xl">
+              <h2 className="mt-5 text-3xl font-bold text-slate-900 md:text-4xl">
                 Estrutura, equipe e processo para atender com velocidade e qualidade
               </h2>
               <p className="mt-6 text-justify text-lg leading-relaxed text-slate-600">
@@ -135,7 +141,7 @@ export default function NossaHistoriaInstitutional() {
             <div className="mt-12 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
               <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-2xl shadow-slate-200/70">
                 <img
-                  src="/images/nossa-historia/equipe.jpg"
+                  src={assetUrl("images/nossa-historia/equipe.jpg")}
                   alt="Equipe da Vitaliza Clean em área operacional"
                   className="h-full max-h-[560px] w-full bg-white object-contain"
                 />
@@ -163,7 +169,7 @@ export default function NossaHistoriaInstitutional() {
                   </p>
                   <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                     <Link
-                      to="/#contato"
+                      to={{ pathname: "/", hash: "#contato" }}
                       className="inline-flex items-center justify-center rounded-2xl bg-white px-6 py-3.5 font-semibold text-slate-900 transition-transform hover:scale-[1.02]"
                     >
                       Solicitar orçamento
@@ -199,7 +205,7 @@ export default function NossaHistoriaInstitutional() {
 
             <div className="mt-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-100 shadow-2xl shadow-slate-200/70">
               <img
-                src="/images/nossa-historia/fachada-com-carga.jpg"
+                src={assetUrl("images/nossa-historia/fachada-com-carga.jpg")}
                 alt="Fachada da Vitaliza Clean com carga pronta para operação logística"
                 className="h-full w-full object-cover"
               />
@@ -212,7 +218,7 @@ export default function NossaHistoriaInstitutional() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div className="flex items-center gap-3">
-              <img src="/images/logotipo_100x100.png" alt="Vitaliza Clean" className="h-12 w-12 object-contain" />
+              <img src={assetUrl("images/logotipo_100x100.png")} alt="Vitaliza Clean" className="h-12 w-12 object-contain" />
               <div>
                 <div className="font-semibold text-white">VITALIZA CLEAN</div>
                 <div className="text-sm text-slate-500">Lavagem, higienização e revitalização de caixas plásticas</div>

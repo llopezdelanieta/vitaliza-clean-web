@@ -1,3 +1,5 @@
+import { assetUrl } from "../lib/assets";
+
 export type ServicePage = {
   slug: string;
   title: string;
@@ -25,7 +27,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     badge: "Alimentício",
     description:
       "Empresas do setor alimentício, hortifruti e supermercadistas que utilizam caixas plásticas em seus processos precisam garantir limpeza, higienização e sanitização com padrão profissional.",
-    image: "/images/servicos/setor-alimenticio.jpg",
+    image: assetUrl("images/servicos/setor-alimenticio.jpg"),
     color: "from-emerald-500 to-teal-600",
     lightColor: "bg-emerald-50",
     badgeColor: "bg-emerald-100 text-emerald-700",
@@ -58,7 +60,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     badge: "Automotivo",
     description:
       "Empresas automotivas, sistemistas e industriais que utilizam caixas plásticas em seus processos precisam controlar a limpeza, higienização e principalmente a remoção de resíduos oleosos.",
-    image: "/images/servicos/setor-automotivo.png",
+    image: assetUrl("images/servicos/setor-automotivo.png"),
     color: "from-blue-500 to-indigo-600",
     lightColor: "bg-blue-50",
     badgeColor: "bg-blue-100 text-blue-700",
@@ -91,7 +93,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     badge: "Hospitalar e Farmacêutico",
     description:
       "Empresas do setor hospitalar e farmacêutico que utilizam caixas ou estrados plásticos em seus processos precisam assegurar limpeza, higienização e sanitização com alto nível de controle.",
-    image: "/images/servicos/setor-hospital-farmaceutico.jpg",
+    image: assetUrl("images/servicos/setor-hospital-farmaceutico.jpg"),
     color: "from-violet-500 to-purple-600",
     lightColor: "bg-violet-50",
     badgeColor: "bg-violet-100 text-violet-700",
