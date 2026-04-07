@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader";
-import { SERVICE_PAGES_BY_SLUG } from "../data/servicePages";
+import { SERVICE_PAGES_BY_SLUG } from "../data/servicePagesBase";
+import { assetUrl } from "../lib/assets";
 
 export default function ServiceSectorPageV2() {
   const { slug } = useParams();
@@ -36,17 +37,17 @@ export default function ServiceSectorPageV2() {
               {service.badge}
             </span>
             <h1 className="mt-6 max-w-4xl text-4xl md:text-5xl lg:text-6xl font-extrabold text-white">
-              SoluÃ§Ãµes para o {service.title.toLowerCase()}
+              Soluções para o {service.title.toLowerCase()}
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/85">
               {service.description}
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <Link
-                to="/#contato"
+                to={{ pathname: "/", hash: "#contato" }}
                 className="inline-flex items-center justify-center rounded-2xl bg-white px-6 py-3.5 font-semibold text-slate-900 transition-transform hover:scale-[1.02]"
               >
-                Solicitar orÃ§amento
+                Solicitar orçamento
               </Link>
               <Link
                 to="/nossa-historia"
@@ -104,7 +105,7 @@ export default function ServiceSectorPageV2() {
               </div>
 
               <Link
-                to="/#contato"
+                to={{ pathname: "/", hash: "#contato" }}
                 className={`mt-8 inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r ${service.color} px-6 py-3.5 font-semibold text-white shadow-lg transition-transform hover:scale-[1.02]`}
               >
                 Falar com a Vitaliza
@@ -117,17 +118,17 @@ export default function ServiceSectorPageV2() {
       <footer className="bg-gray-900 text-gray-400 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <img src="/images/logotipo_100x100.png" alt="Vitaliza Plast" className="h-12" />
+            <img src={assetUrl("images/logotipo_100x100.png")} alt="Vitaliza Plast" className="h-12" />
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               <Link to="/" className="hover:text-cyan-400 transition-colors">
-                InÃ­cio
+                Início
               </Link>
               <Link to="/nossa-historia" className="hover:text-cyan-400 transition-colors">
-                Nossa HistÃ³ria
+                Nossa História
               </Link>
             </div>
             <div className="text-sm text-center">
-              Â© {new Date().getFullYear()} Vitaliza Clean. Todos os direitos reservados.
+              © {new Date().getFullYear()} Vitaliza Clean. Todos os direitos reservados.
             </div>
           </div>
         </div>

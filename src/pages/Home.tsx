@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader";
-import { CLIENTS } from "../data/clients";
+import { CLIENTS } from "../data/clientsBase";
+import { assetUrl } from "../lib/assets";
 
 const NAV_LINKS = [
   { label: "Início", href: "#inicio" },
@@ -52,7 +53,7 @@ const SERVICES = [
     title: "Linha Alimentícia e Supermercadistas",
     description:
       "A higienização de contentores é um procedimento fundamental para evitar a contaminação nos produtos transportados e eliminar fungos, pragas e bactérias. A Vitaliza Clean apresenta as melhores soluções para o setor de alimentos.",
-    image: "/images/food-crates.jpg",
+    image: assetUrl("images/food-crates.jpg"),
     badge: "Alimentício",
     color: "from-emerald-500 to-teal-600",
     lightColor: "bg-emerald-50",
@@ -71,7 +72,7 @@ const SERVICES = [
     title: "Linha Automotiva e Sistemistas",
     description:
       "O mercado de autopeças exige eficiência logística e baixo custo operacional. A Vitaliza Clean contribui significativamente na redução de aquisição de novas embalagens plásticas, revitalizando com qualidade os contentores usados.",
-    image: "/images/automotive-klt.jpg",
+    image: assetUrl("images/automotive-klt.jpg"),
     badge: "Automotivo",
     color: "from-blue-500 to-indigo-600",
     lightColor: "bg-blue-50",
@@ -89,7 +90,7 @@ const SERVICES = [
     title: "Linha Farmacêutica e Saúde",
     description:
       "A higienização de contentores, pallets e estrados é fundamental para evitar contaminação nos produtos armazenados. A Vitaliza Clean atua neste mercado com resultados altamente satisfatórios para grandes indústrias farmacêuticas.",
-    image: "/images/pharma-crates.jpg",
+    image: assetUrl("images/pharma-crates.jpg"),
     badge: "Farmacêutico",
     color: "from-violet-500 to-purple-600",
     lightColor: "bg-violet-50",
@@ -230,6 +231,7 @@ export default function Home() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: DEFAULT_CONTACT_MESSAGE, segment: "" });
   const [formSent, setFormSent] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const filteredClients = activeFilter === "Todos"
     ? CLIENTS
@@ -252,9 +254,21 @@ export default function Home() {
 
   const handleNavClick = (href: string) => {
     if (href.startsWith("#")) {
+      if (location.pathname === "/" && location.hash === href) {
+        const el = document.querySelector(href);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        return;
+      }
+
+      navigate(
+        { pathname: "/", hash: href },
+        { replace: location.pathname === "/" },
+      );
+
       const el = document.querySelector(href);
       if (el) {
-        window.history.replaceState(null, "", href);
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
@@ -274,8 +288,8 @@ export default function Home() {
       {/* HERO */}
       <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src="/images/hero-bg.jpg" alt="Lavagem de caixas plásticas" className="w-full h-full object-cover" />
-          <img src="/images/inicio_background.jpg" alt="Processo de higienização de caixas plásticas" className="absolute inset-0 w-full h-full object-cover" />
+          <img src={assetUrl("images/hero-bg.jpg")} alt="Lavagem de caixas plásticas" className="w-full h-full object-cover" />
+          <img src={assetUrl("images/inicio_background.jpg")} alt="Processo de higienização de caixas plásticas" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(8,47,73,0.92),rgba(14,116,144,0.78),rgba(37,99,235,0.72))]" />
           <div className="absolute inset-0 opacity-5"
             style={{
@@ -345,7 +359,7 @@ export default function Home() {
               <div className="flex justify-center">
                 <div className="rounded-[1.75rem] border border-white bg-white/90 p-6 shadow-xl shadow-cyan-100/80">
                   <img
-                    src="/images/dunsregistered.webp"
+                    src={assetUrl("images/dunsregistered.webp")}
                     alt="Selo D-U-N-S Registered"
                     className="mx-auto h-auto w-full max-w-[320px] object-contain"
                   />
@@ -557,7 +571,7 @@ export default function Home() {
       {/* WASH IMAGE BANNER */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0">
-          <img src="/images/washing-process.jpg" alt="Processo de lavagem" className="w-full h-full object-cover" />
+          <img src={assetUrl("images/washing-process.jpg")} alt="Processo de lavagem" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/95 to-cyan-900/80" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -874,7 +888,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <img src="/images/logotipo_100x100.png" alt="Vitaliza Plast" className="h-12" />
+              <img src={assetUrl("images/logotipo_100x100.png")} alt="Vitaliza Plast" className="h-12" />
             </div>
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               {NAV_LINKS.map((link) => (
@@ -911,3 +925,6 @@ export default function Home() {
     </div>
   );
 }
+
+
+

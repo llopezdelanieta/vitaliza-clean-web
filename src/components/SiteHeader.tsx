@@ -1,16 +1,17 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { SERVICE_SECTORS } from "../data/services";
+import { SERVICE_SECTORS } from "../data/servicesBase";
+import { assetUrl } from "../lib/assets";
 
 type SiteHeaderProps = {
   transparentOnHome?: boolean;
 };
 
 const SECTION_LINKS = [
-  { label: "InÃ­cio", href: "#inicio" },
+  { label: "Início", href: "#inicio" },
   { label: "Clientes", href: "#clientes" },
   { label: "Processo", href: "#processo" },
-  { label: "Por que nÃ³s?", href: "#diferenciais" },
+  { label: "Por que nós?", href: "#diferenciais" },
   { label: "Contato", href: "#contato" },
 ];
 
@@ -62,16 +63,24 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
     setDesktopServicesOpen(false);
     setMobileServicesOpen(false);
 
-    if (location.pathname === "/") {
+    if (location.pathname === "/" && location.hash === hash) {
       const section = document.querySelector(hash);
       if (section) {
-        window.history.replaceState(null, "", hash);
         section.scrollIntoView({ behavior: "smooth", block: "start" });
       }
       return;
     }
 
-    navigate({ pathname: "/", hash });
+    navigate({ pathname: "/", hash }, { replace: location.pathname === "/" });
+
+    if (location.pathname === "/") {
+      window.setTimeout(() => {
+        const section = document.querySelector(hash);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 0);
+    }
   };
 
   const navigateToHistory = () => {
@@ -106,16 +115,16 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
             type="button"
             onClick={() => navigateToSection("#inicio")}
             className="flex items-center group"
-            aria-label="Ir para o inÃ­cio"
+            aria-label="Ir para o início"
           >
             <img
-              src="/images/logotipo_100x100.png"
+              src={assetUrl("images/logotipo_100x100.png")}
               alt="Vitaliza Clean"
               className="h-[4.5rem] w-[4.5rem] object-contain"
             />
           </button>
 
-          <nav className="hidden md:flex items-center gap-1" aria-label="NavegaÃ§Ã£o principal">
+          <nav className="hidden md:flex items-center gap-1" aria-label="Navegação principal">
             {SECTION_LINKS.slice(0, 2).map((link) => (
               <button
                 key={link.href}
@@ -148,7 +157,7 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
                 }}
               >
                 <span className="inline-flex items-center gap-2">
-                  ServiÃ§os
+                  Serviços
                   <svg
                     className={`w-4 h-4 transition-transform ${desktopServicesOpen ? "rotate-180" : ""}`}
                     fill="none"
@@ -161,13 +170,11 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
               </button>
 
               {desktopServicesOpen && (
-                <div
-                  className="absolute left-0 top-full w-80 pt-2"
-                >
+                <div className="absolute left-0 top-full w-80 pt-2">
                   <div
                     id={servicesMenuId}
                     role="menu"
-                    aria-label="Submenu de serviÃ§os"
+                    aria-label="Submenu de serviços"
                     className="rounded-2xl border border-gray-100 bg-white p-2 shadow-2xl shadow-gray-200/80"
                   >
                     {SERVICE_SECTORS.map((service) => (
@@ -206,7 +213,7 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
                 `${desktopLinkClass} ${isActive ? desktopActiveClass : ""}`
               }
             >
-              Nossa HistÃ³ria
+              Nossa História
             </NavLink>
 
             {SECTION_LINKS.slice(3).map((link) => (
@@ -225,7 +232,7 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
               onClick={() => navigateToSection("#contato")}
               className="ml-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-semibold rounded-xl shadow-md shadow-blue-300/40 hover:shadow-blue-400/50 hover:scale-105 transition-all duration-200"
             >
-              Solicitar OrÃ§amento
+              Solicitar Orçamento
             </button>
           </nav>
 
@@ -254,7 +261,7 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
 
       {menuOpen && (
         <div id="mobile-site-menu" className="md:hidden bg-white border-t border-gray-100 shadow-xl">
-          <nav className="px-4 py-4 space-y-1" aria-label="NavegaÃ§Ã£o mÃ³vel">
+          <nav className="px-4 py-4 space-y-1" aria-label="Navegação móvel">
             {SECTION_LINKS.slice(0, 2).map((link) => (
               <button
                 key={link.href}
@@ -274,7 +281,7 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
               aria-haspopup="menu"
               className="flex w-full items-center justify-between px-4 py-3 rounded-xl text-gray-700 font-medium hover:bg-cyan-50 hover:text-cyan-600 transition-colors"
             >
-              <span>ServiÃ§os</span>
+              <span>Serviços</span>
               <svg
                 className={`w-4 h-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`}
                 fill="none"
@@ -289,7 +296,7 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
               <div
                 id="mobile-services-menu"
                 role="menu"
-                aria-label="Submenu de serviÃ§os"
+                aria-label="Submenu de serviços"
                 className="ml-3 space-y-1 border-l border-gray-200 pl-3"
               >
                 {SERVICE_SECTORS.map((service) => (
@@ -330,7 +337,7 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
                 }`
               }
             >
-              Nossa HistÃ³ria
+              Nossa História
             </NavLink>
 
             {SECTION_LINKS.slice(3).map((link) => (
@@ -349,7 +356,7 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
               onClick={() => navigateToSection("#contato")}
               className="w-full mt-2 px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-xl"
             >
-              Solicitar OrÃ§amento
+              Solicitar Orçamento
             </button>
           </nav>
         </div>

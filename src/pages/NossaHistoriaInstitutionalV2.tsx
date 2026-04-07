@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader";
+import { assetUrl } from "../lib/assets";
 
 const STORY_BLOCKS = [
   "Somos a VITALIZA CLEAN, especializada em lavagem e higienizacao de caixas plasticas, onde finalmente os segmentos alimenticio, automotivo, farmaceutico, entre outros, podem contar com uma empresa especializada em lavagem, higienizacao e revitalizacao de caixas plasticas e outros produtos plasticos.",
@@ -28,7 +29,7 @@ export default function NossaHistoriaInstitutionalV2() {
         <section className="relative overflow-hidden bg-slate-950">
           <div className="absolute inset-0">
             <img
-              src="/images/nossa-historia/fachada-com-carga.jpg"
+              src={assetUrl("images/nossa-historia/fachada-com-carga.jpg")}
               alt="Fachada da Vitaliza Clean com caminhao carregado"
               className="h-full w-full object-cover opacity-35"
             />
@@ -85,7 +86,7 @@ export default function NossaHistoriaInstitutionalV2() {
             <div className="space-y-6">
               <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-100 shadow-2xl shadow-slate-200/70">
                 <img
-                  src="/images/nossa-historia/fachada.jpg"
+                  src={assetUrl("images/nossa-historia/fachada.jpg")}
                   alt="Fachada da empresa Vitaliza Clean"
                   className="h-full w-full object-cover"
                 />
@@ -140,7 +141,7 @@ export default function NossaHistoriaInstitutionalV2() {
 
               <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-100 shadow-2xl shadow-slate-200/70">
                 <img
-                  src="/images/nossa-historia/fachada-com-carga.jpg"
+                  src={assetUrl("images/nossa-historia/fachada-com-carga.jpg")}
                   alt="Fachada da Vitaliza Clean com carga pronta para operacao logistica"
                   className="h-full w-full object-cover"
                 />
@@ -152,7 +153,7 @@ export default function NossaHistoriaInstitutionalV2() {
                 <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
                   <div className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white">
                     <img
-                      src="/images/nossa-historia/equipe.jpg"
+                      src={assetUrl("images/nossa-historia/equipe.jpg")}
                       alt="Equipe da Vitaliza Clean em area operacional"
                       className="h-full max-h-[560px] w-full bg-white object-contain"
                     />
@@ -181,7 +182,7 @@ export default function NossaHistoriaInstitutionalV2() {
                 </p>
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <Link
-                    to="/#contato"
+                    to={{ pathname: "/", hash: "#contato" }}
                     className="inline-flex items-center justify-center rounded-2xl bg-white px-6 py-3.5 font-semibold text-slate-900 transition-transform hover:scale-[1.02]"
                   >
                     Solicitar orcamento
@@ -203,14 +204,14 @@ export default function NossaHistoriaInstitutionalV2() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div className="flex items-center gap-3">
-              <img src="/images/logotipo_100x100.png" alt="Vitaliza Clean" className="h-12 w-12 object-contain" />
+              <img src={assetUrl("images/logotipo_100x100.png")} alt="Vitaliza Clean" className="h-12 w-12 object-contain" />
               <div>
                 <div className="font-semibold text-white">VITALIZA CLEAN</div>
                 <div className="text-sm text-slate-500">Lavagem, higienizacao e revitalizacao de caixas plasticas</div>
               </div>
             </div>
             <div className="text-center text-sm md:text-right">
-              Â© {new Date().getFullYear()} Vitaliza Clean. Todos os direitos reservados.
+              © {new Date().getFullYear()} Vitaliza Clean. Todos os direitos reservados.
             </div>
           </div>
         </div>
