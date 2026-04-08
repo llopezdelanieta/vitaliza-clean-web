@@ -12,7 +12,6 @@ const SECTION_LINKS = [
   { label: "Clientes", href: "#clientes" },
   { label: "Processo", href: "#processo" },
   { label: "Por que nós?", href: "#diferenciais" },
-  { label: "Contato", href: "#contato" },
 ];
 
 export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProps) {
@@ -29,6 +28,7 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
   const isHome = location.pathname === "/";
   const solidHeader = scrolled || !transparentOnHome || !isHome;
   const isServicesRoute = location.pathname.startsWith("/servicos/");
+  const isServicesSection = isHome && location.hash === "#servicos";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -120,7 +120,7 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
             <img
               src={assetUrl("images/logotipo_100x100.png")}
               alt="Vitaliza Clean"
-              className="h-[4.5rem] w-[4.5rem] object-contain"
+              className="h-[4.05rem] w-[4.05rem] object-contain"
             />
           </button>
 
@@ -139,25 +139,36 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
             <div
               ref={desktopDropdownRef}
               className="relative"
-              onMouseEnter={() => setDesktopServicesOpen(true)}
-              onMouseLeave={() => setDesktopServicesOpen(false)}
             >
-              <button
-                type="button"
-                aria-expanded={desktopServicesOpen}
-                aria-controls={servicesMenuId}
-                aria-haspopup="menu"
-                className={`${desktopLinkClass} ${isServicesRoute ? desktopActiveClass : ""}`}
-                onClick={() => setDesktopServicesOpen((current) => !current)}
-                onFocus={() => setDesktopServicesOpen(true)}
-                onKeyDown={(event) => {
-                  if (event.key === "Escape") {
-                    setDesktopServicesOpen(false);
-                  }
-                }}
+              <div
+                className={`inline-flex items-stretch rounded-lg ${
+                  solidHeader ? "bg-transparent" : "bg-transparent"
+                }`}
               >
-                <span className="inline-flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => navigateToSection("#servicos")}
+                  className={`${desktopLinkClass} rounded-r-none ${
+                    isServicesSection ? desktopActiveClass : ""
+                  }`}
+                >
                   Serviços
+                </button>
+                <button
+                  type="button"
+                  aria-expanded={desktopServicesOpen}
+                  aria-controls={servicesMenuId}
+                  aria-haspopup="menu"
+                  className={`${desktopLinkClass} rounded-l-none px-3 ${
+                    isServicesRoute || desktopServicesOpen ? desktopActiveClass : ""
+                  }`}
+                  onClick={() => setDesktopServicesOpen((current) => !current)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Escape") {
+                      setDesktopServicesOpen(false);
+                    }
+                  }}
+                >
                   <svg
                     className={`w-4 h-4 transition-transform ${desktopServicesOpen ? "rotate-180" : ""}`}
                     fill="none"
@@ -166,8 +177,8 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
-                </span>
-              </button>
+                </button>
+              </div>
 
               {desktopServicesOpen && (
                 <div className="absolute left-0 top-full w-80 pt-2">
@@ -232,7 +243,7 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
               onClick={() => navigateToSection("#contato")}
               className="ml-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-semibold rounded-xl shadow-md shadow-blue-300/40 hover:shadow-blue-400/50 hover:scale-105 transition-all duration-200"
             >
-              Solicitar Orçamento
+              Fale Conosco
             </button>
           </nav>
 
@@ -273,24 +284,40 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
               </button>
             ))}
 
-            <button
-              type="button"
-              onClick={() => setMobileServicesOpen((current) => !current)}
-              aria-expanded={mobileServicesOpen}
-              aria-controls="mobile-services-menu"
-              aria-haspopup="menu"
-              className="flex w-full items-center justify-between px-4 py-3 rounded-xl text-gray-700 font-medium hover:bg-cyan-50 hover:text-cyan-600 transition-colors"
-            >
-              <span>Serviços</span>
-              <svg
-                className={`w-4 h-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            <div className="flex items-stretch gap-1">
+              <button
+                type="button"
+                onClick={() => navigateToSection("#servicos")}
+                className={`block flex-1 text-left px-4 py-3 rounded-xl font-medium transition-colors ${
+                  isServicesSection
+                    ? "bg-cyan-50 text-cyan-700"
+                    : "text-gray-700 hover:bg-cyan-50 hover:text-cyan-600"
+                }`}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+                Serviços
+              </button>
+              <button
+                type="button"
+                onClick={() => setMobileServicesOpen((current) => !current)}
+                aria-expanded={mobileServicesOpen}
+                aria-controls="mobile-services-menu"
+                aria-haspopup="menu"
+                className={`flex items-center justify-center px-4 py-3 rounded-xl font-medium transition-colors ${
+                  isServicesRoute || mobileServicesOpen
+                    ? "bg-cyan-50 text-cyan-700"
+                    : "text-gray-700 hover:bg-cyan-50 hover:text-cyan-600"
+                }`}
+              >
+                <svg
+                  className={`w-4 h-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </div>
 
             {mobileServicesOpen && (
               <div
@@ -356,7 +383,7 @@ export default function SiteHeader({ transparentOnHome = false }: SiteHeaderProp
               onClick={() => navigateToSection("#contato")}
               className="w-full mt-2 px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-xl"
             >
-              Solicitar Orçamento
+              Fale Conosco
             </button>
           </nav>
         </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader";
 import { CLIENTS } from "../data/clients";
@@ -15,6 +15,19 @@ const NAV_LINKS = [
 ];
 
 const CLIENT_FILTERS = ["Todos", "Alimentício", "Automotivo", "Sistemista", "Industrial", "Hospitalar", "Farmacêutico"];
+
+const FEATURED_ALL_CLIENT_NAMES = [
+  "Marelli",
+  "Scania",
+  "Hospital das Clínicas",
+  "Johnson & Johnson",
+  "Colgate-Palmolive",
+  "Aisin",
+  "Acrilex",
+  "Oba Hortifruti",
+  "Natural da Terra",
+  "Oggi Sorvetes",
+];
 
 /* const LEGACY_CLIENTS = [
   { name: "Carrefour", logo: "🛒", segment: "Alimentício" },
@@ -44,6 +57,7 @@ const LINKEDIN_URL = "https://www.linkedin.com/company/vitalizaclean/posts/?feed
 const SERVICES = [
   {
     id: "alimenticia",
+    slug: "setor-alimenticio",
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8}
@@ -62,6 +76,7 @@ const SERVICES = [
   },
   {
     id: "automotiva",
+    slug: "setor-automotivo-sistemista-industrial",
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8}
@@ -81,6 +96,7 @@ const SERVICES = [
   },
   {
     id: "farmaceutica",
+    slug: "setor-hospital-farmaceutico",
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8}
@@ -228,13 +244,18 @@ const STATS = [
 
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState("Todos");
+  const [showAllClients, setShowAllClients] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: DEFAULT_CONTACT_MESSAGE, segment: "" });
   const [formSent, setFormSent] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
+  const featuredClients = FEATURED_ALL_CLIENT_NAMES
+    .map((name) => CLIENTS.find((client) => client.name === name))
+    .filter((client): client is (typeof CLIENTS)[number] => Boolean(client));
+
   const filteredClients = activeFilter === "Todos"
-    ? CLIENTS
+    ? (showAllClients ? CLIENTS : featuredClients)
     : CLIENTS.filter((c) => c.segment === activeFilter);
     
   useEffect(() => {
@@ -251,6 +272,11 @@ export default function Home() {
 
     return () => window.clearTimeout(timeoutId);
   }, [location.hash]);
+  useEffect(() => {
+    if (activeFilter !== "Todos") {
+      setShowAllClients(false);
+    }
+  }, [activeFilter]);
 
   const handleNavClick = (href: string) => {
     if (href.startsWith("#")) {
@@ -419,7 +445,12 @@ export default function Home() {
             {CLIENT_FILTERS.map((seg) => (
               <button
                 key={seg}
-                onClick={() => setActiveFilter(seg)}
+                onClick={() => {
+                  setActiveFilter(seg);
+                  if (seg === "Todos") {
+                    setShowAllClients(false);
+                  }
+                }}
                 className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-200 cursor-pointer hover:scale-105 ${
                   activeFilter === seg
                     ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-transparent shadow-md shadow-blue-300/40"
@@ -462,6 +493,26 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          {activeFilter === "Todos" && (
+            <div className="mb-16 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setShowAllClients((current) => !current)}
+                className="inline-flex items-center gap-2 rounded-2xl border border-cyan-200 bg-cyan-50 px-6 py-3 text-sm font-semibold text-cyan-700 transition-all duration-200 hover:bg-cyan-100 hover:shadow-md"
+              >
+                {showAllClients ? "Ver menos clientes" : "Ver todos os clientes"}
+                <svg
+                  className={`h-4 w-4 transition-transform ${showAllClients ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </div>
+          )}
 
           {/* Depoimento / destaque */}
           <div className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-3xl p-8 md:p-12 text-white text-center shadow-2xl shadow-blue-200">
@@ -517,15 +568,23 @@ export default function Home() {
                   </div>
                   <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">{service.title}</h3>
                   <p className="text-gray-600 text-base lg:text-lg leading-relaxed mb-6">{service.description}</p>
-                  <button
-                    onClick={() => handleNavClick("#contato")}
-                    className={`inline-flex items-center gap-2 text-sm font-semibold bg-gradient-to-r ${service.color} text-white px-6 py-3 rounded-xl w-fit hover:shadow-lg hover:scale-105 transition-all duration-200`}
-                  >
-                    Solicitar orçamento
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </button>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <Link
+                      to={`/servicos/${service.slug}`}
+                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-800 transition-all duration-200 hover:border-cyan-300 hover:text-cyan-700 hover:shadow-md"
+                    >
+                      Saiba mais
+                    </Link>
+                    <button
+                      onClick={() => handleNavClick("#contato")}
+                      className={`inline-flex items-center justify-center gap-2 text-sm font-semibold bg-gradient-to-r ${service.color} text-white px-6 py-3 rounded-xl w-fit hover:shadow-lg hover:scale-105 transition-all duration-200`}
+                    >
+                      Solicitar orçamento
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -925,4 +984,3 @@ export default function Home() {
     </div>
   );
 }
-

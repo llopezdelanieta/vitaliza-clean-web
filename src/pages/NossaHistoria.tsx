@@ -1,4 +1,4 @@
-﻿import { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader";
 import { assetUrl } from "../lib/assets";
@@ -16,7 +16,7 @@ const DIFFERENTIALS = [
   "Agilidade operacional para devolver as caixas limpas em curto espaço de tempo.",
 ];
 
-export default function NossaHistoriaInstitutional() {
+export default function NossaHistoria() {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, []);
@@ -175,7 +175,7 @@ export default function NossaHistoriaInstitutional() {
                       Solicitar orçamento
                     </Link>
                     <Link
-                      to="/servicos/setor-alimenticio"
+                      to={{ pathname: "/", hash: "#servicos" }}
                       className="inline-flex items-center justify-center rounded-2xl border border-white/30 px-6 py-3.5 font-semibold text-white transition-colors hover:bg-white/10"
                     >
                       Ver nossos serviços

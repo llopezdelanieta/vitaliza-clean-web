@@ -1,10 +1,10 @@
-﻿import { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import SiteHeader from "../components/SiteHeader";
 import { SERVICE_PAGES_BY_SLUG } from "../data/servicePages";
 import { assetUrl } from "../lib/assets";
 
-export default function ServiceSectorPageV2() {
+export default function ServicosPrestados() {
   const { slug } = useParams();
 
   useEffect(() => {
